@@ -9,7 +9,7 @@ const Products = ({ productsdata }) => {
           return (
             <div
               key={product.id}
-              className="sm:max-w-[24%] border-2 border-gray-100 rounded-lg overflow-hidden shadow-sm p-2 min-h-full flex flex-col"
+              className="max-w-full md:max-w-[24%] border-2 border-gray-100 rounded-lg overflow-hidden shadow-sm p-2 min-h-full flex flex-col"
             >
               <Link to={`/products/${product.id}`}>
                 <div className="max-w-[100%] min-h-[150px]  cursor-pointer">
@@ -24,9 +24,9 @@ const Products = ({ productsdata }) => {
               <p className="font-semibold text-center py-2">
                 &#x20B9;{product.price}
               </p>
-              <div className="mt-auto flex gap-2">
+              <div className="mt-auto flex gap-2 flex-col md:flex-row">
                 <Link to={`/products/${product.id}`}>
-                  <button className="bg-gray-700 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded-sm transition duration-300">
+                  <button className="w-full bg-gray-700 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded-sm transition duration-300">
                     View Details
                   </button>
                 </Link>

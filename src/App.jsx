@@ -1,7 +1,6 @@
 import "./App.css";
 import Navbar from "./components/shared/Navbar";
 import Footer from "./components/shared/Footer";
-import Filter from "./components/Filter";
 import Products from "./components/Products";
 import productsData from "./components/ProductsData";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -15,8 +14,7 @@ function App() {
   return (
     <main className="min-h-screen flex flex-col">
       <Router>
-        <Navbar />
-        <Filter />
+        <Navbar setData={setData} />
         <Routes>
           <Route path="/" element={<Products productsdata={data} />} />
           <Route path="products/:id" element={<ProductDetail />} />
