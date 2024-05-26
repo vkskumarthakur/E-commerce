@@ -11,15 +11,21 @@ import { useState } from "react";
 
 function App() {
   const [data, setData] = useState([...productsData]);
+  const [cart, setCart] = useState([]);
   return (
     <main className="min-h-screen flex flex-col">
       <Router>
-        <Navbar setData={setData} />
+        <Navbar setData={setData} cart={cart} />
         <Routes>
-          <Route path="/" element={<Products productsdata={data} />} />
+          <Route
+            path="/"
+            element={
+              <Products productsdata={data} cart={cart} setCart={setCart} />
+            }
+          />
           <Route path="products/:id" element={<ProductDetail />} />
           <Route path="search/:term" element={<SearchResult />} />
-          <Route path="cart" element={<Cart />} />
+          <Route path="cart" element={<Cart cart={cart} setCart={setCart} />} />
         </Routes>
       </Router>
       <Footer />

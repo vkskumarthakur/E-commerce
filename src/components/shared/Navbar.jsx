@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import productsData from "../ProductsData";
 
-const Navbar = ({ setData }) => {
+const Navbar = ({ setData, cart }) => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const filterByCategory = (category) => {
@@ -86,7 +86,7 @@ const Navbar = ({ setData }) => {
               <circle cx={12} cy={12} r={10} />
             </svg>
           </div>
-          <div className="cart-container">
+          <div className="cart-container relative">
             <Link to={"/cart"}>
               <div className="shopping-cart cursor-pointer" title="Cart">
                 <svg
@@ -107,7 +107,9 @@ const Navbar = ({ setData }) => {
                 </svg>
               </div>
             </Link>
-            <div className="cart-count"></div>
+            <div className="cart-count absolute -top-4 -right-1 bg-green-500 h-5 w-5 text-center text-white rounded-full flex items-center justify-center">
+              <span className="text-sm">{cart.length}</span>
+            </div>
           </div>
         </div>
       </nav>
