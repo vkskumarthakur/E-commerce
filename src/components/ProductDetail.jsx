@@ -2,8 +2,32 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import productsData from "./ProductsData";
 import Products from "./Products";
-const ProductDetail = () => {
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+const ProductDetail = ({ cart, setCart }) => {
   const { id } = useParams();
+  const addToCart = (id, price, title, description, imgSrc) => {
+    const obj = {
+      id,
+      price,
+      title,
+      description,
+      imgSrc,
+    };
+    console.log(obj);
+    setCart([...cart, obj]);
+    toast.success("Item Added To Cart", {
+      position: "top-right",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
   const [product, setProduct] = useState({});
   const [relatedProducts, setRelatedProduct] = useState([]);
   useEffect(() => {
@@ -44,7 +68,18 @@ const ProductDetail = () => {
               <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
             </svg>
           </div>
-          <button className="mt-10 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-sm transition duration-300">
+          <button
+            onClick={() =>
+              addToCart(
+                product.id,
+                product.price,
+                product.title,
+                product.description,
+                product.imgSrc
+              )
+            }
+            className="mt-10 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-sm transition duration-300"
+          >
             Add to cart
           </button>
         </div>
@@ -53,7 +88,11 @@ const ProductDetail = () => {
         <h2 className="text-center px-8 font-bold md:text-left">
           Similar Products
         </h2>
-        <Products productsdata={relatedProducts} />
+        <Products
+          productsdata={relatedProducts}
+          cart={cart}
+          setCart={setCart}
+        />
       </div>
     </>
   );
