@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import productsData from "../ProductsData";
 
 const Navbar = ({ setData, cart }) => {
+  const location = useLocation();
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const filterByCategory = (category) => {
@@ -113,7 +114,9 @@ const Navbar = ({ setData, cart }) => {
           </div>
         </div>
       </nav>
-      <div className="px-8 py-2 flex items-center justify-end">
+      {
+        location.pathname == "/" && (
+<div className="px-8 py-2 flex items-center justify-end">
         <div className="cursor-pointer relative group flex items-center gap-3">
           <span>Filter</span>
           <svg
@@ -160,6 +163,9 @@ const Navbar = ({ setData, cart }) => {
           </div>
         </div>
       </div>
+        )
+      }
+      
     </>
   );
 };
